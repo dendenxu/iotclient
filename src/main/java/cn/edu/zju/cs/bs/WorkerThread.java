@@ -1,6 +1,9 @@
 package cn.edu.zju.cs.bs;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -12,6 +15,8 @@ import java.util.Random;
 import com.alibaba.fastjson.JSONObject;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class WorkerThread extends Thread {
     private boolean running = true;
     private int deviceId;
@@ -36,21 +41,21 @@ public class WorkerThread extends Thread {
             mqttClient.connect(connOpts);
             System.out.println("Connected");
             while (running) {
-                //随机等待10秒
+                // 随机等待10秒
                 int interval = rand.nextInt(10);
                 Thread.sleep(interval * 1000);
 
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date now = new Date();
                 int value = rand.nextInt(100);
                 IOTMessage msg = new IOTMessage();
                 msg.setClientId(clientId);
                 msg.setInfo("Device Data " + sdf.format(now));
                 msg.setValue(value);
-                //超过80告警
+                // 超过80告警
                 msg.setAlert(value > 80 ? 1 : 0);
                 rand.nextFloat();
-                //根据杭州经纬度随机生成设备位置信息
+                // 根据杭州经纬度随机生成设备位置信息
                 msg.setLng(119.9 + rand.nextFloat() * 0.6);
                 msg.setLat(30.1 + rand.nextFloat() * 0.4);
                 msg.setTimestamp(now.getTime());
@@ -62,6 +67,7 @@ public class WorkerThread extends Thread {
                 System.out.println("Message published");
             }
             mqttClient.disconnect();
+            mqttClient.close();
             System.out.println("Disconnected");
         } catch (Exception e) {
             e.printStackTrace();
