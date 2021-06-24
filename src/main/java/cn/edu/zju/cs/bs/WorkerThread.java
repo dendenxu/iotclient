@@ -2,6 +2,7 @@ package cn.edu.zju.cs.bs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -17,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class WorkerThread extends Thread {
     private boolean running = true;
     private int deviceId;

@@ -20,10 +20,10 @@ public class IOTClient {
             Properties properties = new Properties();
             FileInputStream in = new FileInputStream("iot.properties");
             // Snapshot of the iot.properties file
-//            devices=5
-//            server=tcp://localhost:1883
-//            topic=testapp
-//            prefix=device
+            // devices=5
+            // server=tcp://localhost:1883
+            // topic=testapp
+            // prefix=device
             properties.load(in);
             devices = Integer.parseInt(properties.getProperty("devices"));
             mqttServer = properties.getProperty("server");
@@ -33,7 +33,7 @@ public class IOTClient {
             Vector<WorkerThread> threadVector = new Vector<WorkerThread>();
             for (int i = 0; i < devices; i++) {
                 WorkerThread thread = new WorkerThread();
-                thread.setDeviceId(i + 1);
+                thread.setDeviceId(i);
                 thread.setMqttServer(mqttServer);
                 thread.setTopic(topic);
                 thread.setClientPrefix(clientPrefix);
