@@ -57,9 +57,9 @@ public class WorkerThread extends Thread {
                 boolean lastmessage = false;
                 boolean running = true;
                 while (running || lastmessage) {
-                    // 随机等待10秒
-                    int interval = rand.nextInt(10);
-                    Thread.sleep(interval * 1000);
+                    // 随机等待1秒
+                    float interval = rand.nextFloat();
+                    Thread.sleep((long) Math.floor(interval * 1));
 
                     Date now = new Date();
                     int value = rand.nextInt(100);
