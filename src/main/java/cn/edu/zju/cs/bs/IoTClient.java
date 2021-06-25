@@ -6,11 +6,14 @@ import java.util.Vector;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
-public class IOTClient {
+public class IoTClient {
     public static void main(String[] args) {
         int devices = 1;
         String mqttServer = "tcp://localhost:1883";
         String topic = "testapp";
+        String lastwilltopic = "testapp/lastwill";
+        String connecttopic = "testapp/connect";
+        String disconnecttopic = "testapp/disconnect";
         String clientPrefix = "device";
 
         Path curDir = Paths.get(".").toAbsolutePath();
@@ -28,6 +31,9 @@ public class IOTClient {
             devices = Integer.parseInt(properties.getProperty("devices"));
             mqttServer = properties.getProperty("server");
             topic = properties.getProperty("topic");
+            lastwilltopic = properties.getProperty("lastwilltopic");
+            connecttopic = properties.getProperty("connecttopic");
+            disconnecttopic = properties.getProperty("disconnecttopic");
             clientPrefix = properties.getProperty("prefix");
 
             Vector<WorkerThread> threadVector = new Vector<WorkerThread>();
@@ -36,6 +42,9 @@ public class IOTClient {
                 thread.setDeviceId(i);
                 thread.setMqttServer(mqttServer);
                 thread.setTopic(topic);
+                thread.setLastwilltopic(lastwilltopic);
+                thread.setConnecttopic(connecttopic);
+                thread.setDisconnecttopic(disconnecttopic);
                 thread.setClientPrefix(clientPrefix);
                 threadVector.add(thread);
                 thread.start();

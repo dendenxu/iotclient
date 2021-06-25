@@ -44,7 +44,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>cn.edu.zju.cs.bs.IOTClient</mainClass>
+                            <mainClass>cn.edu.zju.cs.bs.IoTClient</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
