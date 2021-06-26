@@ -45,6 +45,7 @@ public class WorkerThread extends Thread {
             // With a non persistent connection the broker doesn’t store any subscription
             // information or undelivered messages for the client.
             connOpts.setCleanSession(true);
+            connOpts.setMaxInflight(1024);
             IoTMessage msg = new IoTMessage();
             msg.setClientId(clientId);
             msg.setInfo("Unexpected disconnect from the broker");
@@ -58,8 +59,8 @@ public class WorkerThread extends Thread {
                 boolean running = true;
                 while (running || lastmessage) {
                     // 随机等待1秒
-                    float interval = rand.nextFloat();
-                    Thread.sleep((long) Math.floor(interval * 1));
+                    // float interval = rand.nextFloat();
+                    // Thread.sleep((long) Math.floor(interval * 1000));
 
                     Date now = new Date();
                     int value = rand.nextInt(100);
