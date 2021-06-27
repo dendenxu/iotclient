@@ -30,6 +30,7 @@ public class WorkerThread extends Thread {
     private String connecttopic;
     private String disconnecttopic;
     private String clientPrefix;
+    private float sleepBound = 10; // upper bound for the thread to wait between sending next message, in seconds
 
     public void run() {
         try {
@@ -59,8 +60,8 @@ public class WorkerThread extends Thread {
                 boolean running = true;
                 while (running || lastmessage) {
                     // 随机等待1秒
-                    // float interval = rand.nextFloat();
-                    // Thread.sleep((long) Math.floor(interval * 1000));
+                    float interval = rand.nextFloat();
+                    Thread.sleep((long) Math.round(interval * 1000 * sleepBound));
 
                     Date now = new Date();
                     int value = rand.nextInt(100);

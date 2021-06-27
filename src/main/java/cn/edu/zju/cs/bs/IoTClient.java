@@ -46,6 +46,7 @@ public class IoTClient {
                 thread.setConnecttopic(connecttopic);
                 thread.setDisconnecttopic(disconnecttopic);
                 thread.setClientPrefix(clientPrefix);
+                thread.setSleepBound(10);
                 threadVector.add(thread);
                 thread.start();
             }
