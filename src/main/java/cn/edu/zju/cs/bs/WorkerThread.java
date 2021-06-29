@@ -1,10 +1,8 @@
 package cn.edu.zju.cs.bs;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
